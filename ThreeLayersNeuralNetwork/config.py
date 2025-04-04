@@ -5,7 +5,7 @@ class config:
     output_dim = 10
     decay_rate = 0.95
     learning_rate = 0.005
-    beta = 0.01
+    beta = 0.006
     batch_size = 32
     num_epochs = 10
     # relu or relu1(leaky relu) or sigmoid
