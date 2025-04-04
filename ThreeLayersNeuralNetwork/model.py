@@ -34,7 +34,7 @@ def sigmoid_derivation(a):
 def softmax(x):
     return np.exp(x)/np.sum(np.exp(x), axis=1, keepdims=True)
 
-def loss(y, y_predicted, model, beta): #beta 正则化系数
+def loss(y, y_predicted, model, beta): #beta 正则化强度
     L2_Reg = (beta/2)*(np.sum(np.square(model['w1'])) + np.sum(np.square(model['w2'])) + np.sum(np.square(model['w3'])))
     cross_loss = np.mean(-np.sum(y * np.log(y_predicted), axis=1)) + L2_Reg
     return cross_loss
@@ -42,7 +42,7 @@ def loss(y, y_predicted, model, beta): #beta 正则化系数
 def accuracy(y, y_predicted):
     return np.mean(np.argmax(y_predicted, axis=1) == np.argmax(y, axis=1))
 
-def init_model(input_dim, hidden_dim, hidden_dim2, output_dim):  #两层隐藏层，这里设置的hidden_sum是一样的，理论上来说应该变小有助于特征提取（？）
+def init_model(input_dim, hidden_dim, hidden_dim2, output_dim):  
     w1 = np.random.randn(input_dim, hidden_dim)/np.sqrt(input_dim)
     b1 = np.zeros(hidden_dim)
     w2 = np.random.randn(hidden_dim, hidden_dim2)/np.sqrt(hidden_dim)
@@ -52,7 +52,7 @@ def init_model(input_dim, hidden_dim, hidden_dim2, output_dim):  #两层隐藏�
     model = {'w1':w1,'b1':b1, 'w2':w2,'b2':b2, 'w3':w3,'b3':b3}
     return model
 
-def forward_propagation(model, X, activation = 'relu'):#这里设置两层hidden层使用一样的activation func，理论上也可以使用不一样的（?）
+def forward_propagation(model, X, activation = 'relu'):
     w1, b1, w2, b2, w3, b3 = model['w1'], model['b1'], model['w2'], model['b2'], model['w3'], model['b3']
     
     z1 = np.dot(X, w1) + b1
