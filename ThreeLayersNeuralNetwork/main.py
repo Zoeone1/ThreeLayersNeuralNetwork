@@ -5,7 +5,6 @@ from train import train_model
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
-#read data
 X_train = []
 y_train = []
 
@@ -19,13 +18,11 @@ X_train = np.concatenate(X_train, axis=0)
 y_train = np.concatenate(y_train, axis=0)
 y_train = one_hot(y_train.T, 10)
 
-
 test_batch_path = r"images\cifar-10-python\cifar-10-batches-py\test_batch"
 X_test = read_images(test_batch_path)
 y_test = read_labels(test_batch_path)
 y_test = one_hot(y_test.T, 10)
 
-#read parameter
 input_dim = config.input_dim
 hidden_dim = config.hidden_dim
 hidden_dim2 = config.hidden_dim2
@@ -37,12 +34,10 @@ batch_size = config.batch_size
 num_epochs = config.num_epochs
 activation = config.activation
 
-#train
 model = init_model(input_dim, hidden_dim, hidden_dim2, output_dim)
 model, best_model, history_train_losses, history_train_accuracies, history_test_losses, history_test_accuracies = train_model(model, X_train, y_train, X_test, y_test, learning_rate, decay_rate, beta, num_epochs, batch_size, activation)
 save_model(best_model, "best_model_"+activation)
 
-#plot
 fig, ax = plt.subplots(2, 1, figsize=(12, 8))
 ax[0].plot(history_train_losses, label='Training loss')
 ax[0].plot(history_test_losses, label='Testing loss')
