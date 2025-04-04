@@ -3,10 +3,11 @@ import seaborn as sns
 import os
 from model import load_model
 import numpy as np
+
 #模型网络参数可视化
 # 参数热力图
 def plot_heatmap(weights, layer_name, save_path):
-    # 抽样比例
+    # 抽样比例 
     if weights.shape[0] < 50:
         sample_rate = 1
     else:
