@@ -1,5 +1,6 @@
 from model import *
 from tqdm import tqdm
+from test import test_model
 
 def train_model(model, X_train, y_train, X_test, y_test, learning_rate, decay_rate, beta, num_epochs, batch_size, activation='relu'):
     num_train = X_train.shape[0]
@@ -27,9 +28,8 @@ def train_model(model, X_train, y_train, X_test, y_test, learning_rate, decay_ra
         y_train_predicted, _ = forward_propagation(model, X_train, activation)
         train_loss = loss(y_train, y_train_predicted, model, beta)
         train_accuracy = accuracy(y_train, y_train_predicted)
-        y_test_predicted, _ = forward_propagation(model, X_test, activation)
-        test_loss = loss(y_test, y_test_predicted, model, beta)
-        test_accuracy = accuracy(y_test, y_test_predicted)
+        save_model(model, model)
+        test_loss, test_accuracy = test_model(model, X_test, y_test, beta, activation='relu')
 
         if best_test_accuracy < test_accuracy:
             best_test_accuracy = test_accuracy
