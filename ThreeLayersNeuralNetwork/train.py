@@ -29,6 +29,7 @@ def train_model(model, X_train, y_train, X_test, y_test, learning_rate, decay_ra
         train_loss = loss(y_train, y_train_predicted, model, beta)
         train_accuracy = accuracy(y_train, y_train_predicted)
         save_model(model, "currentModel")
+        model = load_model("currentModel")
         test_loss, test_accuracy = test_model("currentModel", X_test, y_test, beta, activation='relu')
 
         if best_test_accuracy < test_accuracy:
